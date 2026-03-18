@@ -39,7 +39,7 @@ const AdminSchema = new mongoose.Schema(
         "manage_products",
         "manage_orders",
         "manage_users",
-      ],
+      ], 
     }
   }
 );
