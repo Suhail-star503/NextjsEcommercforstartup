@@ -39,30 +39,18 @@ export async function GET(req) {
         );
 
     } catch (error) {
+        console.error("❌ API ERROR:");
+        console.error(error); // full error
+        console.error("Message:", error.message);
+        console.error("Stack:", error.stack);
+
         return NextResponse.json(
-            { success: false, message: error.message },
-            { status: 401 }
+            {
+                success: false,
+                message: error.message || "Server error",
+            },
+            { status: 500 } // ❗ change from 401 → 500
         );
     }
 }
 
-// CREATE PRODUCT
-// export async function POST(req) {
-//     try {
-//         await connectDB();
-
-//         const body = await req.json();
-
-//         const product = await Product.create(body);
-
-//         return NextResponse.json(
-//             { success: true, product },
-//             { status: 201 }
-//         );
-//     } catch (error) {
-//         return NextResponse.json(
-//             { success: false, message: error.message },
-//             { status: 500 }
-//         );
-//     }
-// }
