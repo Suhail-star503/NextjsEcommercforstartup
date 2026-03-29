@@ -14,7 +14,7 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  
+
 
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
@@ -28,12 +28,12 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      if(!email) {
+      if (!email) {
         setError("Please enter valid email");
         setLoading(false);
         return;
       }
-      if(!password) {
+      if (!password) {
         setError("Please enter valid password");
         setLoading(false);
         return;
@@ -70,9 +70,11 @@ const AdminLogin = () => {
       <div className="absolute w-[420px] h-[420px] bg-blue-300/40 blur-3xl rounded-full top-[120px] right-[120px]" />
       <div className="absolute w-[350px] h-[350px] bg-indigo-300/40 blur-3xl rounded-full bottom-[-120px] right-[-120px]" />
       <div className="absolute w-[260px] h-[260px] bg-cyan-200/40 blur-3xl rounded-full top-[45%] left-[55%]" />
+      <div className="absolute w-[260px] h-[260px] bg-cyan-200/40 blur-3xl rounded-full top-[65%] right-[55%]" />
+      <div className="absolute w-[260px] h-[260px] bg-cyan-200/40 blur-3xl rounded-full top-[35%] right-[45%]" />
 
       {/* MAIN CONTAINER */}
-      <div className="relative z-10 w-full flex">
+      <div className="relative z-10 w-[90%] mx-auto flex">
 
         {/* LEFT SIDE */}
 
@@ -215,7 +217,7 @@ const AdminLogin = () => {
             transition disabled:opacity-60"
                   />
 
-                  
+
                 </div>
               </div>
 

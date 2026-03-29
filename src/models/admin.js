@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const AdminSchema = new mongoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -13,36 +13,79 @@ const AdminSchema = new mongoose.Schema(
       required: true,
       unique: true,
       lowercase: true,
-      trim: true,
+      index: true,
     },
 
     password: {
       type: String,
       required: true,
       minlength: 6,
+      select: false, // hide password by default
     },
 
     role: {
       type: String,
-      enum: ["admin", "super-admin"],
+      enum: ["super_admin", "admin", "manager", "support"],
       default: "admin",
     },
 
-    avatar: {
-      type: String,
-      default: "",
+    permissions: [
+      {
+        type: String,
+        enum: [
+          "manage_users",
+          "manage_orders",
+          "manage_products",
+          "manage_categories",
+          "view_reports",
+          "manage_coupons",
+          "manage_settings",
+        ],
+      },
+    ],
+
+    isActive: {
+      type: Boolean,
+      default: true,
     },
 
-    permissions: {
-      type: [String],
-      default: [
-        "manage_products",
-        "manage_orders",
-        "manage_users",
-      ], 
-    }
+    lastLogin: {
+      type: Date,
+    },
+
+    loginHistory: [
+      {
+        ip: String,
+        device: String,
+        date: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+
+    avatar: {
+      type: String,
+    },
+
+    phone: {
+      type: String,
+    },
+
+    twoFactorEnabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
+  },
+  {
+    timestamps: true,
   }
 );
 
-export default mongoose.models.Admin ||
-mongoose.model("Admin", AdminSchema);
+// Prevent model overwrite in dev (Next.js / hot reload)
+const Admin = mongoose.model("Admin", adminSchema);
+
+export default Admin;

@@ -3,7 +3,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Users, ShoppingCart, Package, Settings } from "lucide-react";
+import { LayoutDashboard, Users, ShoppingCart, Package, Settings,UserLock } from "lucide-react";
+
 
 export default function Sidebar() {
 
@@ -38,6 +39,15 @@ export default function Sidebar() {
         >
           <Users size={18} />
           Customers
+        </Link>
+
+         <Link
+          href="/admin/dashboard/admins"
+          className={`flex items-center gap-3 px-4 py-2 rounded-lg transition
+          ${pathname === "/admin/dashboard/admins" ? activeClass : normalClass}`}
+        >
+          <UserLock size={18} />
+          Manage Admins
         </Link>
 
         <Link
